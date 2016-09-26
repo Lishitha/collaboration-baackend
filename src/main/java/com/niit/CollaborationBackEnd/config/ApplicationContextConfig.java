@@ -15,6 +15,10 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.niit.CollaborationBackEnd.model.Blog;
+import com.niit.CollaborationBackEnd.model.UserDetail;
+
+
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
@@ -44,7 +48,8 @@ public class ApplicationContextConfig {
 	@Bean(name="sessionFactory")
 	public SessionFactory getSessionFactory(DataSource datasource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(datasource);
-		
+		sessionBuilder.addAnnotatedClass(Blog.class);
+		//sessionBuilder.addAnnotatedClass(UserDetail.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 
