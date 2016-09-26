@@ -8,19 +8,17 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.niit.CollaborationBackEnd.model.UserDetail;
+import com.niit.CollaborationBackEnd.model.Blog;
 
-public class UserDetailDAOImpl implements UserDetailDAO {
-	
-	//private static final logger log = LoggerFactory.getLogger(USe)
+public class BlogDAOImpl implements BlogDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private UserDetail userDetail;
-	
-	public UserDetailDAOImpl(SessionFactory sessionFactory)
+	private Blog blog;
+
+	public BlogDAOImpl(SessionFactory sessionFactory)
 	{
 		try 
 		{
@@ -33,24 +31,24 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	}
 	
 	@Transactional
-	public List<UserDetail> list()
+	public List<Blog> list()
 	{
-		String hql = "from UserDetail" ;
+		String hql = "from Blog" ;
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
-		List<UserDetail> list = query.list();
+		List<Blog> list = query.list();
 		
 		return list;
 	}
 	
 	@Transactional
-	public boolean saveOrUpdate(UserDetail userdetails)
+	public boolean saveOrUpdate(Blog userdetails)
 	{
 		try
 		{
-			sessionFactory.getCurrentSession().saveOrUpdate(userDetail);
+			sessionFactory.getCurrentSession().saveOrUpdate(blog);
 			return true;
 		}
 		catch(Exception e)
@@ -61,12 +59,12 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	}
 	
 	@Transactional
-	public UserDetail get(String id)
+	public Blog get(String id)
 	{
-		String hql = "from UserDetails where id=" + "'" + id + "'" ;
+		String hql = "from Blogs where id=" + "'" + id + "'" ;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
-		List<UserDetail> list = query.list();
+		List<Blog> list = query.list();
 		
 		if(list !=null && !list.isEmpty())
 		{
@@ -80,7 +78,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	{
 		try
 		{
-			sessionFactory.getCurrentSession().delete(userDetail);
+			sessionFactory.getCurrentSession().delete(blog);
 		}
 		catch(Exception e)
 		{
