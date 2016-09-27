@@ -1,6 +1,7 @@
 package com.niit.CollaborationBackEnd.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Blog {
 
+	@Id
 	private String id;
 	private String description;
 	private String userId;

@@ -9,20 +9,18 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.CollaborationBackEnd.model.UserDetail;
+import com.niit.CollaborationBackEnd.model.Friend;
 
-@Repository("userDetailDAO")
-public class UserDetailDAOImpl implements UserDetailDAO {
-	
-	//private static final logger log = LoggerFactory.getLogger(USe)
+@Repository("friendDAO")
+public class FriendDAOImpl implements FriendDAO{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private UserDetail userDetail;
-	
-	public UserDetailDAOImpl(SessionFactory sessionFactory)
+	private Friend friend;
+
+	public FriendDAOImpl(SessionFactory sessionFactory)
 	{
 		try 
 		{
@@ -35,24 +33,24 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	}
 	
 	@Transactional
-	public List<UserDetail> list()
+	public List<Friend> list()
 	{
-		String hql = "from UserDetail" ;
+		String hql = "from Friend" ;
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
-		List<UserDetail> list = query.list();
+		List<Friend> list = query.list();
 		
 		return list;
 	}
 	
 	@Transactional
-	public boolean saveOrUpdate(UserDetail userDetail)
+	public boolean saveOrUpdate(Friend friend)
 	{
 		try
 		{
-			sessionFactory.getCurrentSession().saveOrUpdate(userDetail);
+			sessionFactory.getCurrentSession().saveOrUpdate(friend);
 			
 		}
 		catch(Exception e)
@@ -65,12 +63,12 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	}
 	
 	@Transactional
-	public UserDetail get(String id)
+	public Friend get(String id)
 	{
-		String hql = "from UserDetails where id=" + "'" + id + "'" ;
+		String hql = "from Friends where id=" + "'" + id + "'" ;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
-		List<UserDetail> list = query.list();
+		List<Friend> list = query.list();
 		
 		if(list !=null && !list.isEmpty())
 		{
@@ -84,7 +82,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	{
 		try
 		{
-			sessionFactory.getCurrentSession().delete(userDetail);
+			sessionFactory.getCurrentSession().delete(friend);
 		}
 		catch(Exception e)
 		{
@@ -94,5 +92,4 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 		
 		return true;
 	}
-
 }

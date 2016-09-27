@@ -11,14 +11,15 @@ public class BlogTestCase {
 		
 		@SuppressWarnings("resource")
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("com.niit.CollaborationBackEnd.TestCase");
+		context.scan("com.niit.CollaborationBackEnd");
 		context.refresh();
+		
 		BlogDAO blogDAO= (BlogDAO) context.getBean("blogDAO");
 		Blog blog = (Blog) context.getBean("blog");
 		
-		blog.setId("BL01");
-		blog.setDescription("This is blog 1 ");
-		blog.setUserId("US01");
+		blog.setId("BL02");
+		blog.setDescription("This is blog 2 ");
+		blog.setUserId("US02");
 		blog.setStatus('N');
 		
 		blogDAO.saveOrUpdate(blog);

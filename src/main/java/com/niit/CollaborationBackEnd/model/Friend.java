@@ -15,7 +15,7 @@ public class Friend {
 	private String id;
 	private String userId;
 	private String friendId;
-	private String status;
+	private char status;
 	public String getId() {
 		return id;
 	}
@@ -34,11 +34,11 @@ public class Friend {
 	public void setFriendId(String friendId) {
 		this.friendId = friendId;
 	}
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(char c) {
+		this.status = c;
 	}
 	
 	

@@ -1,7 +1,15 @@
 package com.niit.CollaborationBackEnd.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.springframework.stereotype.Component;
+
+@Entity
+@Component
 public class Role {
 	
+	@Id
 	private String id;
 	private String name;
 	public String getId() {

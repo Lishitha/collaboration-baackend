@@ -13,17 +13,17 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.niit.CollaborationBackEnd.model.Blog;
+import com.niit.CollaborationBackEnd.model.Friend;
 import com.niit.CollaborationBackEnd.model.UserDetail;
 
 
 @Configuration
-@EnableWebMvc
-@EnableTransactionManagement
 @ComponentScan("com.niit.CollaborationBackEnd")
-public class ApplicationContextConfig {
+@EnableTransactionManagement
+public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	@Bean(name = "datasource")
 	public DataSource getOracleDatasource() {
@@ -34,22 +34,37 @@ public class ApplicationContextConfig {
 		datasource.setPassword("123");
 	
 	
-		Properties connectionProperties = new Properties();
-		connectionProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-		connectionProperties.setProperty("hibernate.show_sql", "true");
-		connectionProperties.setProperty("hibernate.format_sql", "true");
-		connectionProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
+		/*Properties connectionProperties = new Properties();
 		
-		datasource.setConnectionProperties(connectionProperties);
+		connectionProperties.put("hibernate.show_sql", "true");
+		connectionProperties.put("hibernate.format_sql", "true");
+		connectionProperties.put("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
+		connectionProperties.put("hibernate.hbm2ddl.auto", "update");
+		
+		datasource.setConnectionProperties(connectionProperties);*/
 		return datasource;
 	}
+	
+	private Properties getHibernateProperties(){
+		Properties properties=new Properties();
+		properties.put("hibernate.format_sql", "true");
+		properties.put("hibernate.hbm2ddl.auto", "update");
+		properties.put("hibernate.show_sql","true");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		return properties;
+		
+	}
+	
 
 	@Autowired
-	@Bean(name="sessionFactory")
+	@Bean
 	public SessionFactory getSessionFactory(DataSource datasource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(datasource);
+		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClass(Blog.class);
-		//sessionBuilder.addAnnotatedClass(UserDetail.class);
+		sessionBuilder.addAnnotatedClass(UserDetail.class);
+		sessionBuilder.addAnnotatedClass(Friend.class);
+		//sessionBuilder.addAnnotatedClass(Role.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 
