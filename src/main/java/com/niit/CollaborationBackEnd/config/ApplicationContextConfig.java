@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.niit.CollaborationBackEnd.model.Blog;
+import com.niit.CollaborationBackEnd.model.Event;
 import com.niit.CollaborationBackEnd.model.Friend;
 import com.niit.CollaborationBackEnd.model.UserDetail;
-
 
 @Configuration
 @ComponentScan("com.niit.CollaborationBackEnd")
@@ -34,18 +34,18 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 		datasource.setPassword("123");
 	
 	
-		/*Properties connectionProperties = new Properties();
+		Properties connectionProperties = new Properties();
 		
 		connectionProperties.put("hibernate.show_sql", "true");
 		connectionProperties.put("hibernate.format_sql", "true");
 		connectionProperties.put("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
 		connectionProperties.put("hibernate.hbm2ddl.auto", "update");
 		
-		datasource.setConnectionProperties(connectionProperties);*/
+		datasource.setConnectionProperties(connectionProperties);
 		return datasource;
 	}
 	
-	private Properties getHibernateProperties(){
+	/*private Properties getHibernateProperties(){
 		Properties properties=new Properties();
 		properties.put("hibernate.format_sql", "true");
 		properties.put("hibernate.hbm2ddl.auto", "update");
@@ -53,17 +53,18 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		return properties;
 		
-	}
+	}*/
 	
 
-	@Autowired
+	
 	@Bean
 	public SessionFactory getSessionFactory(DataSource datasource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(datasource);
-		sessionBuilder.addProperties(getHibernateProperties());
+		/*sessionBuilder.addProperties(getHibernateProperties());*/
 		sessionBuilder.addAnnotatedClass(Blog.class);
 		sessionBuilder.addAnnotatedClass(UserDetail.class);
 		sessionBuilder.addAnnotatedClass(Friend.class);
+		sessionBuilder.addAnnotatedClass(Event.class);
 		//sessionBuilder.addAnnotatedClass(Role.class);
 		return sessionBuilder.buildSessionFactory();
 	}

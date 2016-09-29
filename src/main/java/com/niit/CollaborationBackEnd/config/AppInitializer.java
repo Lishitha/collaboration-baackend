@@ -1,4 +1,4 @@
-package com.niit.CollaborationBackEnd.config;
+/*package com.niit.CollaborationBackEnd.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -6,8 +6,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class[] getRootConfigClasses() {
-		
-		return new Class[] { ApplicationContextConfig.class };
+		System.out.println("getRootConfigClasses Working");
+		return new Class[] { AppConfig.class };
 	}
 
 	@Override
@@ -18,8 +18,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected String[] getServletMappings() {
-		
+		System.out.println("getServletMappings Working");
+
 		return new String[] { "/" };
 	}
 	
-}
+}*/
