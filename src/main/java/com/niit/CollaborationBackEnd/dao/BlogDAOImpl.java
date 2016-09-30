@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,23 +45,36 @@ public class BlogDAOImpl implements BlogDAO {
 		
 		return list;
 	}
-	
 	@Transactional
-	public boolean saveOrUpdate(Blog blog)
-	{
-		try
-		{
-			sessionFactory.getCurrentSession().saveOrUpdate(blog);
+	public boolean save(Blog blog) {
+	
+		
+		try {
+			sessionFactory.getCurrentSession().save(blog);
+		} catch (HibernateException e) {
 			
-		}
-		catch(Exception e)
-		{
 			e.printStackTrace();
 			return false;
 		}
-		
+	
 		return true;
 	}
+
+
+	@Transactional
+	public boolean update(Blog blog) {
+
+		try {
+			sessionFactory.getCurrentSession().update(blog);
+		} catch (HibernateException e) {
+			
+			e.printStackTrace();
+			return false;
+		}
+	
+		return true;
+	}
+
 	
 	@Transactional
 	public Blog get(String id)

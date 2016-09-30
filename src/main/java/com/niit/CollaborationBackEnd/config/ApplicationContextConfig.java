@@ -13,6 +13,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.niit.CollaborationBackEnd.model.Blog;
@@ -20,6 +21,7 @@ import com.niit.CollaborationBackEnd.model.Event;
 import com.niit.CollaborationBackEnd.model.Friend;
 import com.niit.CollaborationBackEnd.model.UserDetail;
 
+@EnableWebMvc
 @Configuration
 @ComponentScan("com.niit.CollaborationBackEnd")
 @EnableTransactionManagement
